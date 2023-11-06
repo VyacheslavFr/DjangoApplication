@@ -1,0 +1,43 @@
+{% load static %}
+{% load mytags %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Приложение</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>{{ header }}</h1>
+    {% for el in table %}
+        <div class="product_container">
+            <h3>{{ el.vendor_code }}</h3>
+            <p>{{ el.category }}</p>
+            <p>{{ el.sub_category }}</p>
+            <p>{{ el.product_type }}</p>
+            <p>{{ el.completeness }}</p>
+            <p>{{ el.gender }}</p>
+            <p>{{ el.season }}</p>
+            <p>{{ el.material }}</p>
+            <p>{{ el.compound }}</p>
+            <p>{{ el.density }}</p>
+            <p>{{ el.color }}</p>
+        </div>
+    {% endfor %}
+    {% for prod in data %}
+        <div class="product_container">
+            <h3>{{ prod|get_value:"Артикул" }}</h3>
+            <p>{{ prod|get_value:"Категория" }}</p>
+            <p>{{ prod|get_value:"Подкатегория" }}</p>
+            <p>{{ prod|get_value:"Вид изделия" }}</p>
+            <p>{{ prod|get_value:"Комплектность" }}</p>
+            <p>{{ prod|get_value:"Пол" }}</p>
+            <p>{{ prod|get_value:"Сезон" }}</p>
+            <p>{{ prod|get_value:"Ткань/Материал верха" }}</p>
+            <p>{{ prod|get_value:"Состав" }}</p>
+            <p>{{ prod|get_value:"Плотность/Толщина материала" }}</p>
+            <p>{{ prod|get_value:"Цвет" }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>
