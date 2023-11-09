@@ -6,9 +6,11 @@ import json
 def index_view(request):
     with open('myapp/fixtures/parser.json', 'r', encoding='UTF-8') as f:
         data = json.load(f)
+    products = Products.objects.all()
+
     context = {
         'header': 'Привет, мир!',
-        'table': Products.objects.order_by('category'),
+        'table': products,
         'data': data
     }
     return render(request, 'index.html', context)

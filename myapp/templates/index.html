@@ -11,7 +11,8 @@
     <h1>{{ header }}</h1>
     {% for el in table %}
         <div class="product_container">
-            <h3>{{ el.vendor_code }}</h3>
+            <h3>{{ el.product_name }}</h3>
+            <p>{{ el.vendor_code }}</p>
             <p>{{ el.category }}</p>
             <p>{{ el.sub_category }}</p>
             <p>{{ el.product_type }}</p>
@@ -26,7 +27,8 @@
     {% endfor %}
     {% for prod in data %}
         <div class="product_container">
-            <h3>{{ prod|get_value:"Артикул" }}</h3>
+            <h3>{{ prod|get_value:"Наименование" }}</h3>
+            <p>{{ prod|get_value:"Артикул" }}</p>
             <p>{{ prod|get_value:"Категория" }}</p>
             <p>{{ prod|get_value:"Подкатегория" }}</p>
             <p>{{ prod|get_value:"Вид изделия" }}</p>

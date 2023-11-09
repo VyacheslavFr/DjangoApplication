@@ -2,20 +2,21 @@ from django.db import models
 
 
 class Products(models.Model):
-    vendor_code = models.CharField('Артикул', max_length=100)
-    category = models.TextField('Категория')
-    sub_category = models.TextField('Подкатегория')
-    product_type = models.TextField('Вид изделия')
-    completeness = models.TextField('Комплектность')
-    gender = models.TextField('Пол')
-    season = models.TextField('Сезон')
-    material = models.TextField('Ткань/Материал верха')
-    compound = models.TextField('Состав')
-    density = models.TextField('Плотность/Толщина материала')
-    color = models.TextField('Цвет')
+    product_name = models.CharField('Наименование', max_length=100)
+    vendor_code = models.CharField('Артикул', max_length=20)
+    category = models.CharField('Категория', max_length=40)
+    sub_category = models.CharField('Подкатегория', max_length=40)
+    product_type = models.CharField('Вид изделия', max_length=40)
+    completeness = models.CharField('Комплектность', max_length=40)
+    gender = models.CharField('Пол', max_length=20)
+    season = models.CharField('Сезон', max_length=20)
+    material = models.CharField('Ткань/Материал верха', max_length=40)
+    compound = models.CharField('Состав', max_length=20)
+    density = models.CharField('Плотность/Толщина материала', max_length=20)
+    color = models.CharField('Цвет', max_length=20)
 
     def __str__(self):
-        return self.vendor_code
+        return self.name
 
     class Meta:
         verbose_name = 'Товар'
