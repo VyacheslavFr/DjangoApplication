@@ -16,7 +16,7 @@ class Products(models.Model):
     color = models.CharField('Цвет', max_length=20)
 
     def __str__(self):
-        return self.name
+        return self.product_name
 
     class Meta:
         verbose_name = 'Товар'
