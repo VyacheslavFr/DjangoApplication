@@ -14,7 +14,7 @@ def created_products_view(request):
 
 
 def imported_products_view(request):
-    with open('myapp/fixtures/parser.json', 'r', encoding='UTF-8') as f:
+    with open('\Project\Parser\parser.json', 'r', encoding='UTF-8') as f:
         data = json.load(f)
 
     for product_quality in data:
