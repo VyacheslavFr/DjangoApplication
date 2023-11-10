@@ -7,6 +7,14 @@
     <title>Приложение</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
+
+{% if user.is_authenticated %}
+<a href="logout">выйти ({{ user.username }})</a>
+{% else %}
+<a href="register">Регистрация на сайте</a>
+<a href="login">Авторизация</a>
+{% endif %}
+
 <body>
     {% for el in table %}
         <div class="product_container">

@@ -2,6 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from myapp.models import Products
 import json
+from django.views.generic.edit import FormView
+from django.views.generic import TemplateView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login
+from django.contrib.auth import logout
 
 
 def created_products_view(request):
@@ -40,3 +46,19 @@ def product_view_detailed(request, id):
     product = get_object_or_404(Products, id=id)
     context = {'product': product}
     return render(request, 'detailed_product.html', context)
+
+
+class RegisterFormView(FormView):
+    form_class = UserCreationForm
+    success_url = 'myapp/login/'
+
+    template_name = 'register.html'
+
+    def form_valid(self, form):
+        form.save()
+        return super(RegisterFormView, self).form_valid(form)
+
+    def form_invalid(self, form):
+
+        return super(RegisterFormView, self).form_invalid(form)
+
