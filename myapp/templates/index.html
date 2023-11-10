@@ -10,7 +10,7 @@
 <body>
     {% for el in table %}
         <div class="product_container">
-            <h3>{{ el.product_name }}</h3>
+            <a href="{% url 'detailed_product' el.id %}">{{ el.product_name }}</a>
             <p>{{ el.vendor_code }}</p>
             <p>{{ el.category }}</p>
             <p>{{ el.sub_category }}</p>
@@ -26,7 +26,7 @@
     {% endfor %}
     {% for prod in data %}
         <div class="product_container">
-            <h3>{{ prod|get_value:"Наименование" }}</h3>
+            <a href="{% url 'detailed_product' prod.id %}">{{ prod|get_value:"Наименование" }}</a>
             <p>{{ prod|get_value:"Артикул" }}</p>
             <p>{{ prod|get_value:"Категория" }}</p>
             <p>{{ prod|get_value:"Подкатегория" }}</p>

@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from myapp.models import Products
 import json
 
@@ -34,3 +34,9 @@ def imported_products_view(request):
         )
 
     return HttpResponse("Done")
+
+
+def product_view_detailed(request, id):
+    product = get_object_or_404(Products, id=id)
+    context = {'product': product}
+    return render(request, 'detailed_product.html', context)

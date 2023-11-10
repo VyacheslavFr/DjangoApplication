@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Продукт</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="product_container_detailed">
+        <h3>{{ product.product_name }}</h3>
+        <p>{{ product.vendor_code }}</p>
+        <p>{{ product.category }}</p>
+        <p>{{ product.sub_category }}</p>
+        <p>{{ product.product_type }}</p>
+        <p>{{ product.completeness }}</p>
+        <p>{{ product.gender }}</p>
+        <p>{{ product.season }}</p>
+        <p>{{ product.material }}</p>
+        <p>{{ product.compound }}</p>
+        <p>{{ product.density }}</p>
+        <p>{{ product.color }}</p>
+    </div>
+</body>
+</html>
