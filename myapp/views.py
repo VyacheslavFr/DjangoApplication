@@ -1,9 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
+
+from myapp.forms import RegisterForm
 from myapp.models import Products
 import json
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, CreateView
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -92,3 +95,13 @@ def product_view_detailed(request, id):
 @login_required
 def profile_view(request):
     return render(request, 'profile.html')
+
+
+class RegisterView(FormView):
+    form_class = RegisterForm
+    template_name = 'registration/register.html'
+    success_url = reverse_lazy('profile')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
