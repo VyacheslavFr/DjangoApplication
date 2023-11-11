@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from myapp.models import Products
@@ -8,6 +9,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
 
 def created_products_view(request):
@@ -48,17 +51,44 @@ def product_view_detailed(request, id):
     return render(request, 'detailed_product.html', context)
 
 
-class RegisterFormView(FormView):
-    form_class = UserCreationForm
-    success_url = 'myapp/login/'
+# class RegisterFormView(FormView):
+#     form_class = UserCreationForm
+#     success_url = 'myapp/login/'
+#
+#     template_name = 'register.html'
+#
+#     def form_valid(self, form):
+#         form.save()
+#         return super(RegisterFormView, self).form_valid(form)
+#
+#     def form_invalid(self, form):
+#
+#         return super(RegisterFormView, self).form_invalid(form)
 
-    template_name = 'register.html'
+# def register(request):
+#     if request.method == 'POST':
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data.get('username')
+#             messages.success(request, f'Account created for {username}!')
+#             return redirect('')
+#     else:
+#         form = UserCreationForm()
+#     context = {'form': form}
+#     return render(request, 'register.html', context)
+#
+#
+# def logout_view(request):
+#     logout(request)
+#     messages.success(request, 'You have been logged out.')
+#     return redirect('myapp/')
 
-    def form_valid(self, form):
-        form.save()
-        return super(RegisterFormView, self).form_valid(form)
 
-    def form_invalid(self, form):
+# def login_view(request):
+#
 
-        return super(RegisterFormView, self).form_invalid(form)
 
+@login_required
+def profile_view(request):
+    return render(request, 'profile.html')
