@@ -7,5 +7,6 @@
 <body>
     {{ user.username }}
     <button onclick="location.href='{% url 'logout' %}?next=/profile'">Logout</button>
+    <button onclick="location.href='{% url 'password_change' %}'">Change Password</button>
 </body>
 </html>

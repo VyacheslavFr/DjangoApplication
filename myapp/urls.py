@@ -8,6 +8,4 @@ urlpatterns = [
     path('product/<int:id>/', views.product_view_detailed, name='detailed_product'),
     path('profile/', views.profile_view, name='profile'),
     path('register/', RegisterView.as_view(), name='register'),
-    # path('login/', views.login_view.as_view()),
-    # path('logout/', views.logout_view, name='logout'),
 ]
