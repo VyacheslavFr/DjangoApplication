@@ -6,6 +6,12 @@
     <title>Продукт</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
+
+{% if user.is_authenticated %}
+    <button onclick="location.href='{% url 'logout' %}?next=/profile'">Выйти</button>
+    <a href="profile">{{ user.username }}</a>
+{% endif %}
+
 <body>
     <div class="product_container_detailed">
         <h3>{{ product.product_name }}</h3>

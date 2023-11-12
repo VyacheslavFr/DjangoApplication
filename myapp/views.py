@@ -12,7 +12,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 
 
@@ -54,54 +54,18 @@ def product_view_detailed(request, id):
     return render(request, 'detailed_product.html', context)
 
 
-# class RegisterFormView(FormView):
-#     form_class = UserCreationForm
-#     success_url = 'myapp/login/'
-#
-#     template_name = 'register.html'
-#
-#     def form_valid(self, form):
-#         form.save()
-#         return super(RegisterFormView, self).form_valid(form)
-#
-#     def form_invalid(self, form):
-#
-#         return super(RegisterFormView, self).form_invalid(form)
-
-# def register(request):
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             messages.success(request, f'Account created for {username}!')
-#             return redirect('')
-#     else:
-#         form = UserCreationForm()
-#     context = {'form': form}
-#     return render(request, 'register.html', context)
-#
-#
-# def logout_view(request):
-#     logout(request)
-#     messages.success(request, 'You have been logged out.')
-#     return redirect('myapp/')
-
-
-# def login_view(request):
-#
-
-
 @login_required
 def profile_view(request):
     return render(request, 'profile.html')
 
 
-class RegisterView(FormView):
-    form_class = RegisterForm
-    template_name = 'registration/register.html'
-    success_url = reverse_lazy('profile')
-
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
