@@ -5,8 +5,18 @@
     <title>Profile</title>
 </head>
 <body>
-    {{ user.username }}
-    <button onclick="location.href='{% url 'logout' %}?next=/profile'">Logout</button>
-    <button onclick="location.href='{% url 'password_change' %}'">Change Password</button>
+    <div>
+        <p>Имя пользователя: {{ user.username }}</p>
+        <p>Имя: {{ user.first_name }}</p>
+        <p>Фамилия: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+
+        <p>
+            <button onclick="location.href='{% url 'logout' %}?next=/profile'">Logout</button>
+            <button onclick="location.href='{% url 'password_change' %}'">Change Password</button>
+            <button onclick="location.href='{% url 'edit_profile' %}'">Редактировать профиль</button>
+        </p>
+
+    </div>
 </body>
 </html>

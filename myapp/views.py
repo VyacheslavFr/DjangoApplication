@@ -1,19 +1,13 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
-
-from myapp.forms import RegisterForm
+from django.shortcuts import get_object_or_404
+from myapp.forms import EditProfileForm
 from myapp.models import Products
 import json
-from django.views.generic.edit import FormView, CreateView
-from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
-from django.contrib.auth import logout
-from django.shortcuts import render, redirect, reverse
-from django.contrib import messages
+from django.shortcuts import render, redirect
 
 
 def created_products_view(request):
@@ -48,6 +42,7 @@ def imported_products_view(request):
     return HttpResponse("Done")
 
 
+@login_required
 def product_view_detailed(request, id):
     product = get_object_or_404(Products, id=id)
     context = {'product': product}
@@ -69,3 +64,16 @@ def register_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+@login_required
+def edit_profile(request):
+    user = get_object_or_404(User, id=request.user.id)
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = EditProfileForm(instance=user)
+    return render(request, 'edit_profile.html', {'form': form})
