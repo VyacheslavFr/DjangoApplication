@@ -8,15 +8,21 @@ import json
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 
 
-def created_products_view(request):
+def created_products_view(request, page_number=1):
     products = Products.objects.all()
+    paginator = Paginator(products, 10)
+    page = paginator.get_page(page_number)
+    print(page)
 
-    context = {
-        'table': products
-    }
-    return render(request, 'index.html', context)
+    return render(request, 'index.html', {'products': page})
+
+    # context = {
+    #     'table': products
+    # }
+    # return render(request, 'index.html', context)
 
 
 def imported_products_view(request):
@@ -38,7 +44,6 @@ def imported_products_view(request):
             density=product_quality['Плотность/Толщина материала'],
             color=product_quality['Цвет'],
         )
-
     return HttpResponse("Done")
 
 
@@ -77,3 +82,5 @@ def edit_profile(request):
     else:
         form = EditProfileForm(instance=user)
     return render(request, 'edit_profile.html', {'form': form})
+
+

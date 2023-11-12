@@ -10,14 +10,14 @@
 
 {% if user.is_authenticated %}
     <button onclick="location.href='{% url 'logout' %}?next=/profile'">Выйти</button>
-    <a href="profile">{{ user.username }}</a>
+    <a href={% url 'profile' %}>{{ user.username }}</a>
 {% else %}
-    <a href="register">Регистрация на сайте</a>
-    <a href="profile">Авторизация</a>
+    <a href={% url 'register' %}>Регистрация на сайте</a>
+    <a href={% url 'login' %}>Авторизация</a>
 {% endif %}
 
 <body>
-    {% for el in table %}
+    {% for el in products %}
         <div class="product_container">
             <a href="{% url 'detailed_product' el.id %}">{{ el.product_name }}</a>
             <p>{{ el.vendor_code }}</p>
@@ -49,5 +49,10 @@
             <p>{{ prod|get_value:"Цвет" }}</p>
         </div>
     {% endfor %}
+    <div class="pagination">
+        {% for page in products.paginator.page_range %}
+            <a href={% url 'index_pages' page %}>{{ page }}</a>
+        {% endfor %}
+    </div>
 </body>
 </html>
