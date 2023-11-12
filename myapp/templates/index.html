@@ -31,6 +31,7 @@
             <p>{{ el.compound }}</p>
             <p>{{ el.density }}</p>
             <p>{{ el.color }}</p>
+            <p>{{ el.price }}</p>
         </div>
     {% endfor %}
     {% for prod in data %}
@@ -47,6 +48,7 @@
             <p>{{ prod|get_value:"Состав" }}</p>
             <p>{{ prod|get_value:"Плотность/Толщина материала" }}</p>
             <p>{{ prod|get_value:"Цвет" }}</p>
+            <p>{{ prod|get_value:"Цена"}}</p>
         </div>
     {% endfor %}
     <div class="pagination">

@@ -19,11 +19,6 @@ def created_products_view(request, page_number=1):
 
     return render(request, 'index.html', {'products': page})
 
-    # context = {
-    #     'table': products
-    # }
-    # return render(request, 'index.html', context)
-
 
 def imported_products_view(request):
     with open('\Project\Parser\parser.json', 'r', encoding='UTF-8') as f:
@@ -43,6 +38,7 @@ def imported_products_view(request):
             compound=product_quality['Состав'],
             density=product_quality['Плотность/Толщина материала'],
             color=product_quality['Цвет'],
+            price=product_quality['Цена'],
         )
     return HttpResponse("Done")
 

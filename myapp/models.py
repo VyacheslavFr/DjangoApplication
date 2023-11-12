@@ -14,6 +14,7 @@ class Products(models.Model):
     compound = models.CharField('Состав', max_length=20)
     density = models.CharField('Плотность/Толщина материала', max_length=20)
     color = models.CharField('Цвет', max_length=20)
+    price = models.CharField('Цена', max_length=20)
 
     def __str__(self):
         return self.product_name
